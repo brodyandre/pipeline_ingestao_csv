@@ -89,7 +89,66 @@ df["idade"] = df["idade"].astype(int)
 
 # 5. Persistência em SQLite
 conn = sqlite3.connect(":memory:")
+
 df.to_sql("usuarios", conn, index=False, if_exists="replace")
 
 # 6. Validação da persistência
 print(pd.read_sql_query("SELECT * FROM usuarios", conn))
+```
+
+🔄 Possíveis Expansões
+
+🚨 Armazenar registros inválidos em tabela separada
+
+📧 Enviar alertas por e-mail em caso de erros
+
+⚙️ Orquestrar com Apache Airflow ou Prefect
+
+📊 Processamento em lotes com chunksize no Pandas
+
+
+📂 Estrutura de Repositório
+
+📁 pipeline-dados-csv
+ 
+ ├── extract.py      # Ingestão de dados
+ 
+ ├── transform.py    # Limpeza e transformação
+ 
+ ├── validate.py     # Regras de validação
+ 
+ ├── load.py         # Persistência em banco
+ 
+ ├── notify.py       # Relatórios e alertas
+ 
+ └── README.md       # Documentação
+
+
+📌 Resumo
+
+Um pipeline de dados robusto deve ser:
+
+🔄 Modularizável
+
+🧪 Testável
+
+♻️ Idempotente
+
+🧭 Rastreável
+
+📡 Monitorável
+
+🌀 Versionável
+
+📈 Escalável
+
+🔐 Seguro
+
+Com essa estrutura, dados brutos viram informações confiáveis, escaláveis e de alto valor.
+
+✨ Autor
+
+👤 Luiz André - Data Engineer
+📌 GitHub
+
+
