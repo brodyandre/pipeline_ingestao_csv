@@ -51,14 +51,26 @@ Uma aplicação recebe diariamente um **CSV com dados de usuários** contendo:
 - `email` → E-mail válido  
 - `idade` → Idade declarada  
 
-🎯 Objetivo:  
+## Regras de Negócio:
+
+1 - nenhum campo pode estar vazio;
+
+2 - o campo idade deve conter um valor numérico válido;
+
+3 - os registros com falhas devem ser descartados automaticamente sem comprometer a carga de dados;
+
+4 - apenas dados íntegros devem permanecer na base.
+
+
+## 🎯 Objetivo:  
 ✔️ Validar os dados  
 ✔️ Descartar inconsistências  
 ✔️ Persistir apenas registros válidos em um banco SQL  
 
+
 ---
 
-### 🔄 Fluxo da Solução  
+## 🔄 Fluxo da Solução  
 
 1. 📥 **Leitura segura do CSV**  
 2. 🧹 **Remoção de registros incompletos**  
@@ -69,7 +81,7 @@ Uma aplicação recebe diariamente um **CSV com dados de usuários** contendo:
 
 ---
 
-### 💻 Código Exemplo (Python + Pandas + SQLite)  
+## 💻 Código Exemplo (Python + Pandas + SQLite)  
 
 ```python
 import pandas as pd
@@ -96,7 +108,7 @@ df.to_sql("usuarios", conn, index=False, if_exists="replace")
 print(pd.read_sql_query("SELECT * FROM usuarios", conn))
 ```
 
-🔄 Possíveis Expansões
+## 🔄 Possíveis Expansões
 
 🚨 Armazenar registros inválidos em tabela separada
 
@@ -104,27 +116,22 @@ print(pd.read_sql_query("SELECT * FROM usuarios", conn))
 
 ⚙️ Orquestrar com Apache Airflow ou Prefect
 
-📊 Processamento em lotes com chunksize no Pandas
+## 📊 Processamento em lotes com chunksize no Pandas
 
 
-📂 Estrutura de Repositório
+#### 📂 Estrutura de Repositório
 
 📁 pipeline-dados-csv
- 
+```bash 
  ├── extract.py      # Ingestão de dados
- 
  ├── transform.py    # Limpeza e transformação
- 
  ├── validate.py     # Regras de validação
- 
  ├── load.py         # Persistência em banco
- 
  ├── notify.py       # Relatórios e alertas
- 
  └── README.md       # Documentação
+```
 
-
-📌 Resumo
+## 📌 Resumo
 
 Um pipeline de dados robusto deve ser:
 
@@ -146,7 +153,7 @@ Um pipeline de dados robusto deve ser:
 
 Com essa estrutura, dados brutos viram informações confiáveis, escaláveis e de alto valor.
 
-✨ Autor
+## ✨ Autor
 
 👤 Luiz André - Data Engineer
 📌 GitHub
